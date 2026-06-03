@@ -2,10 +2,10 @@ const Task = require('../models/task');
 const User = require('../models/Users');
 const { createTaskSchema, updateTaskSchema } = require('../middlewaare/joi');
 
-// GET ALL TASKS
+
 const getAllTasks = async (req, res) => {
   try {
-    // if auth is added use req.user._id, otherwise get all
+   
     const tasks = await Task.find().populate('user', 'name');
     res.json(tasks);
   } catch (err) {
@@ -13,7 +13,7 @@ const getAllTasks = async (req, res) => {
   }
 };
 
-// GET TASK BY ID
+
 const getTaskById = async (req, res) => {
   try {
     const task = await Task.findById(req.params.id).populate('user', 'name');
@@ -25,13 +25,13 @@ const getTaskById = async (req, res) => {
   }
 };
 
-// CREATE TASK
+
 const createTask = async (req, res) => {
   try {
     const { error, value } = createTaskSchema.validate(req.body);
     if (error) return res.status(400).json({ message: error.details[0].message });
 
-    // Check user exists in DB
+    
     const userExists = await User.findById(value.user);
     if (!userExists) return res.status(404).json({ message: 'User not found. Provide a valid user id.' });
 
@@ -56,11 +56,11 @@ const updateTask = async (req, res) => {
     const { error, value } = updateTaskSchema.validate(req.body);
     if (error) return res.status(400).json({ message: error.details[0].message });
 
-    // Check task exists and belongs to this user
+   
     const task = await Task.findOne({ _id: req.params.id, user: value.user });
     if (!task) return res.status(404).json({ message: 'Task not found or you are not authorized to update it' });
 
-    // Remove user from the fields being updated
+   
     const { user, ...updateFields } = value;
 
     const updated = await Task.findByIdAndUpdate(req.params.id, updateFields, { new: true });
@@ -72,7 +72,7 @@ const updateTask = async (req, res) => {
   }
 };
 
-// DELETE TASK
+
 const deleteTask = async (req, res) => {
   try {
     const task = await Task.findByIdAndDelete(req.params.id);
