@@ -1,8 +1,23 @@
 import '../personal/home.css';
 import { Link } from "react-router-dom";
 import { FaTasks, FaCheckCircle, FaClock, FaPlusCircle, FaStar, FaBolt } from "react-icons/fa";
+import { useEffect, useState } from 'react';
 
 function LandingPage() {
+  const [userName, setUserName] = useState('User');
+
+  useEffect(() => {
+    const userStr = localStorage.getItem('user');
+    if (userStr) {
+      try {
+        const user = JSON.parse(userStr);
+        setUserName(user.name || 'User');
+      } catch (err) {
+        console.error('Error parsing user data:', err);
+      }
+    }
+  }, []);
+
   return (
     <div className="landing-body">
       <header className="header2" style={{display:'flex', alignItems:'center', height:'140px', position:'fixed', top:0, width:'100%', backgroundColor:'white', zIndex:10, boxShadow:'0 4px 15px rgba(0,0,0,0.1)', padding:'0 20px'}}>
@@ -22,7 +37,7 @@ function LandingPage() {
       <div className="welcome-hero">
         <div className="welcome-badge">✨ Personal Task Management System</div>
         <h1 className="welcome-title">
-          Welcome back, <span className="welcome-name">User</span> 👋
+          Welcome back, <span className="welcome-name">{userName}</span> 👋
         </h1>
         <p className="welcome-subtitle">
           "Stay organized, stay ahead. Your productivity journey continues here."
