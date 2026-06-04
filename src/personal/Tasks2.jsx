@@ -159,7 +159,7 @@ function Tasks() {
 
       {/* HEADER */}
       <header className="tk-header">
-        <Link to="/home" className="tk-logo">
+        <Link to="/landing" className="tk-logo">
           <span>📚</span><span className="tk-logo-text">PTMs</span>
         </Link>
         <nav className="tk-nav">

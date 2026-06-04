@@ -24,7 +24,7 @@ function LandingPage() {
         <h1 className='ptns' style={{marginLeft: 160}}>📚 </h1>
         <h1 className="ptns2">PTMs</h1>
         <nav className="nav">
-          <Link to="/home" className="a">Home</Link>
+          <Link to="/landing" className="a">Home</Link>
           <Link to="/tasks" className="a">My tasks</Link>
           <Link to="/dashboard" className="a">My dashboard</Link>
           <div className="a3-div">
