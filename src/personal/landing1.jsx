@@ -3,11 +3,27 @@ import { FaRocket } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 import  '../personal/form2.css';
 import LandingImage from '../landing.jpeg';
+import { useState, useEffect } from 'react';
 
 function LandingPage1() {
+  const [showHeader, setShowHeader] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setShowHeader(true);
+      } else {
+        setShowHeader(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="landing1-page">
-      <header className="landing1-header"> 
+      <header className="landing1-header" style={{position: 'fixed', top: 0, width: '100%', zIndex: 999, opacity: showHeader ? 0.95 : 0, transition: 'opacity 0.3s ease', pointerEvents: showHeader ? 'auto' : 'none'}}> 
         <h1 className="landing1-logo">📚</h1>
         <h1 className="landing1-logotext">PTMs</h1>
         <nav className="landing1-nav">
