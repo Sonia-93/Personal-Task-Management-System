@@ -23,7 +23,7 @@ function LandingPage1() {
 
   return (
     <div className="landing1-page">
-      <header className="landing1-header" style={{position: 'fixed', top: 0, width: '100%', zIndex: 999, opacity: showHeader ? 0.95 : 0, transition: 'opacity 0.3s ease', pointerEvents: showHeader ? 'auto' : 'none'}}> 
+      <header className="landing1-header" style={{position: 'fixed', top: 0, width: '100%', zIndex: 999, opacity: showHeader ? 0.95 : 0, transition: 'opacity 0.3s ease', pointerEvents: showHeader ? 'auto' : 'none'}}>
         <h1 className="landing1-logo">📚</h1>
         <h1 className="landing1-logotext">PTMs</h1>
         <nav className="landing1-nav">
@@ -33,8 +33,18 @@ function LandingPage1() {
         </nav>
       </header>
 
-      <div className="landing1-hero" style={{backgroundImage: `url(${LandingImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: 'relative'}}>
+      <div className="landing1-hero" style={{backgroundImage: `url(${LandingImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', position: 'relative', paddingTop: '60px'}}>
         <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.3)'}}></div>
+        
+        {/* Top Navigation - Visible on Hero */}
+        <nav className="landing1-nav" style={{position: 'relative', zIndex: 10, width: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center', padding: '20px 0', opacity: showHeader ? 0 : 1, transition: 'opacity 0.3s ease'}}>
+          <div style={{display: 'flex', gap: '40px'}}>
+            <Link to="/" className="landing1-link" style={{color: '#4caf50', fontWeight: 'bold', fontSize: '16px'}}>Home</Link> 
+            <Link to="/about" className="landing1-link" style={{color: '#4caf50', fontWeight: 'bold', fontSize: '16px'}}>About Us</Link>
+          </div>
+          <Link to="/signup" className="landing1-signup" style={{backgroundColor: '#4caf50', color: 'white', padding: '10px 20px', borderRadius: '5px', textDecoration: 'none', fontWeight: 'bold'}}>SignUp</Link>
+        </nav>
+
         <div style={{position: 'relative', zIndex: 1, textAlign: 'center'}}>
           <h1 className="landing1-hero-title">📚 <span className="landing1-hero-span">PTMs</span></h1>
           <h2 className="landing1-hero-sub">Personal Task Management System</h2>
@@ -53,6 +63,7 @@ function LandingPage1() {
             </Link>
           </div>
         </div>
+        <div style={{height: '60px'}}></div>
       </div>
     </div>
   );
