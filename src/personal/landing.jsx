@@ -2,6 +2,7 @@ import '../personal/home.css';
 import { Link } from "react-router-dom";
 import { FaTasks, FaCheckCircle, FaClock, FaPlusCircle, FaStar, FaBolt } from "react-icons/fa";
 import { useEffect, useState } from 'react';
+import LandingImage from '../landing.jpeg';
 
 function LandingPage() {
   const [userName, setUserName] = useState('User');
@@ -35,6 +36,7 @@ function LandingPage() {
 
       {/* WELCOME HERO */}
       <div className="welcome-hero">
+        <img src={LandingImage} alt="Welcome to PTMS" style={{width: '100%', height: 'auto', borderRadius: '12px', marginBottom: '30px'}} />
         <div className="welcome-badge">✨ Personal Task Management System</div>
         <h1 className="welcome-title">
           Welcome back, <span className="welcome-name">{userName}</span> 👋
