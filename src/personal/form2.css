@@ -11,59 +11,79 @@
 .landing1-header {
   display: flex;
   align-items: center;
-  height: 100px;
-  background: rgba(255, 255, 255, 0.15);
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0 40px;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.landing1-header--scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid #e8f5e9;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.landing1-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .landing1-logo {
-  font-size: 60px;
+  font-size: 48px;
   line-height: 1;
 }
 
 .landing1-logotext {
-  font-size: 38px;
+  font-size: 32px;
   font-weight: 900;
-  color: white;
-  letter-spacing: -6px;
-  margin-left: 10px;
+  color: #427444;
+  letter-spacing: -4px;
 }
 
 .landing1-nav {
   display: flex;
   align-items: center;
   gap: 25px;
-  margin-left: auto;
 }
 
 .landing1-link {
   text-decoration: none;
-  color: white;
-  font-size: 20px;
+  color: #4caf50;
+  font-size: 18px;
   font-weight: 600;
-  transition: opacity 0.2s ease;
+  transition: color 0.2s ease;
 }
 
-.landing1-link:hover { opacity: 0.8; }
+.landing1-link:hover {
+  color: #2e7d32;
+}
 
 .landing1-signup {
   text-decoration: none;
   color: #152c20;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   background-color: white;
   padding: 10px 22px;
   border-radius: 20px;
+  border: 1px solid transparent;
   transition: all 0.3s ease;
 }
 
 .landing1-signup:hover {
-  background-color: transparent;
+  background-color: #4caf50;
   color: white;
-  border: 1px solid white;
+  border-color: #4caf50;
 }
 
 .landing1-hero {
@@ -71,18 +91,38 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 100px);
+  min-height: 100vh;
+  padding: 100px 24px 60px;
   text-align: center;
-  padding: 40px 20px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.landing1-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+.landing1-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .landing1-hero-title {
-  font-size: 8rem;
+  font-size: clamp(3rem, 10vw, 7rem);
   font-weight: 900;
   color: white;
-  letter-spacing: -15px;
-  line-height: 1;
-  margin-bottom: 20px;
+  letter-spacing: -6px;
+  line-height: 1.1;
+  margin-bottom: 16px;
 }
 
 .landing1-hero-span {
@@ -90,22 +130,24 @@
 }
 
 .landing1-hero-sub {
-  font-size: 2.5rem;
+  font-size: clamp(1.4rem, 4vw, 2.5rem);
   font-weight: 900;
   color: white;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
+  line-height: 1.2;
 }
 
 .landing1-hero-p {
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
   font-weight: 300;
-  color: white;
-  margin-bottom: 40px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 36px;
+  max-width: 520px;
 }
 
 .landing1-btns {
   display: flex;
-  gap: 25px;
+  gap: 20px;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -118,7 +160,7 @@
   gap: 10px;
   background-color: white;
   color: #152c20;
-  border: none;
+  border: 1px solid white;
   width: 180px;
   height: 55px;
   font-size: 1.2rem;
@@ -132,7 +174,6 @@
 .landing1-btn-explore:hover {
   background-color: transparent;
   color: white;
-  border: 1px solid white;
 }
 
 .landing1-btn-signup {
@@ -155,4 +196,37 @@
 .landing1-btn-signup:hover {
   background-color: white;
   color: #152c20;
+}
+
+@media (max-width: 600px) {
+  .landing1-header {
+    padding: 0 20px;
+    height: 70px;
+  }
+
+  .landing1-logo {
+    font-size: 36px;
+  }
+
+  .landing1-logotext {
+    font-size: 24px;
+    letter-spacing: -2px;
+  }
+
+  .landing1-nav {
+    gap: 14px;
+  }
+
+  .landing1-link {
+    font-size: 15px;
+  }
+
+  .landing1-signup {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .landing1-hero {
+    padding-top: 90px;
+  }
 }
