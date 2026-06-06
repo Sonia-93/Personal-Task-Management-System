@@ -19,7 +19,7 @@ function LoginForm() {
       const response = await API.post('/auth/login', { email, password });
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
-      navigate('/landing'); // Redirect to landing page after login
+      navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Invalid email or password');
     } finally {

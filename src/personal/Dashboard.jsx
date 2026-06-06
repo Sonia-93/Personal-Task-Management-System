@@ -131,7 +131,7 @@ function Dashboard() {
       {/* HEADER */}
       <header className="db-header">
         <div className="db-header-left">
-          <Link to="/landing" className="db-logo">
+          <Link to="/dashboard" className="db-logo">
             <span>📚</span>
             <span className="db-logo-text">PTMs</span>
           </Link>

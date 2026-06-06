@@ -37,8 +37,10 @@ function SignUpForm() {
     setLoading(true);
     try {
       await API.post('/auth/verify-email', { email, code });
-      alert("Email verified successfully! You can now log in.");
-      navigate('/login');
+      const response = await API.post('/auth/login', { email, password });
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Invalid verification code');
     } finally {
@@ -87,7 +89,7 @@ function SignUpForm() {
               <input type="text" className="signup-input" placeholder="Enter 6-digit code" value={code} onChange={e => setCode(e.target.value)} required />
 
               <button type="submit" className="signup-btn" disabled={loading}>
-                {loading ? "Verifying..." : "Verify & Login"}
+                {loading ? "Verifying..." : "Verify & Continue"}
               </button>
             </form>
           </>

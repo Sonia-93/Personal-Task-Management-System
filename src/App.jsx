@@ -1,62 +1,52 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-import LandingPage1 from "./personal/landing1.jsx";
-
-import LandingPage from "./personal/landing.jsx";
 import Dashboard from "./personal/Dashboard.jsx";
-import Home from "./personal/home.jsx";
-import AboutUs from "./personal/aboutus.jsx";
 import SignUpForm from "./personal/form.jsx";
 import LoginForm from "./personal/login.jsx";
 import Tasks from "./personal/Tasks2.jsx";
 
-// ProtectedRoute component to guard routes that require authentication
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('token');
   if (!token) {
-    // Redirect to login if not authenticated
     return <Navigate to="/login" replace />;
   }
   return children;
+};
+
+const SignUpRoute = () => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    return <Navigate to="/dashboard" replace />;
+  }
+  return <SignUpForm />;
 };
 
 function App() {
   return (
     <Router>
       <Routes>
-        
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/signup" element={<SignUpForm />} />
+        <Route path="/" element={<SignUpRoute />} />
+        <Route path="/signup" element={<SignUpRoute />} />
         <Route path="/login" element={<LoginForm />} />
-        
-        {/* Protected Routes - Require Login */}
-        <Route 
-          path="/landing" 
-          element={
-            <ProtectedRoute>
-              <LandingPage />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/dashboard" 
+        <Route path="/landing" element={<Navigate to="/dashboard" replace />} />
+
+        <Route
+          path="/dashboard"
           element={
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="/tasks" 
+        <Route
+          path="/tasks"
           element={
             <ProtectedRoute>
               <Tasks />
             </ProtectedRoute>
-          } 
+          }
         />
-        
       </Routes>
     </Router>
   );

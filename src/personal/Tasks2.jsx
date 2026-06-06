@@ -159,11 +159,11 @@ function Tasks() {
 
       {/* HEADER */}
       <header className="tk-header">
-        <Link to="/landing" className="tk-logo">
+        <Link to="/dashboard" className="tk-logo">
           <span>📚</span><span className="tk-logo-text">PTMs</span>
         </Link>
         <nav className="tk-nav">
-          <Link to="/landing" className="tk-nav-link">Home</Link>
+          <Link to="/dashboard" className="tk-nav-link">Dashboard</Link>
           <Link to="/tasks" className="tk-nav-link tk-active">My Tasks</Link>
           <Link to="/dashboard" className="tk-nav-link">Dashboard</Link>
           <button onClick={logout} className="tk-logout" style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>Logout</button>
