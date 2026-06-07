@@ -14,7 +14,10 @@ console.log('MONGO_URI =', process.env.MONGO_URI);
 
 connectDB();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
 if(config.get('env')==='development'){
     app.use(morgan('dev'));
 }
