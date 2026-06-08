@@ -2,7 +2,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* PAGE */
+
 .auth-page {
   min-height: 100vh;
   display: grid;
@@ -10,7 +10,7 @@
   font-family: 'DM Sans', sans-serif;
 }
 
-/* LEFT PANEL — landing image */
+
 .auth-left {
   position: relative;
   overflow: hidden;
