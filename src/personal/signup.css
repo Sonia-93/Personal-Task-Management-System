@@ -68,7 +68,7 @@
 
 .auth-left-heading em {
   font-style: italic;
-  color: #d4a45a;
+  color: #4caf50;
 }
 
 .auth-left-desc {
@@ -88,7 +88,7 @@
   max-width: 340px;
 }
 
-.auth-stars { color: #d4a45a; font-size: 0.9rem; margin-bottom: 8px; }
+.auth-stars { color: #4caf50; font-size: 0.9rem; margin-bottom: 8px; }
 
 .auth-testimonial-text {
   color: rgba(255,255,255,0.9);
@@ -107,7 +107,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: #d4a45a;
+  background-color: #4caf50;
   color: #fff;
   font-weight: 800;
   font-size: 0.9rem;
@@ -167,7 +167,7 @@
 }
 
 .auth-tab-active {
-  background-color: #d4a45a;
+  background-color: #4caf50;
   color: #fff;
   box-shadow: 0 2px 8px rgba(212,164,90,0.35);
 }
@@ -217,7 +217,7 @@
 
 .auth-input:focus {
   outline: none;
-  border-color: #d4a45a;
+  border-color: #4caf50;
   box-shadow: 0 0 0 3px rgba(212,164,90,0.15);
   background-color: #fff;
 }
@@ -244,7 +244,7 @@
   color: #555;
 }
 
-.auth-check-row input[type="checkbox"] { margin-top: 2px; flex-shrink: 0; accent-color: #d4a45a; }
+.auth-check-row input[type="checkbox"] { margin-top: 2px; flex-shrink: 0; accent-color: #4caf50; }
 
 /* ERROR */
 .auth-error {
@@ -260,7 +260,7 @@
 .auth-submit {
   width: 100%;
   padding: 14px;
-  background-color: #d4a45a;
+  background-color: #4caf50;
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -272,7 +272,7 @@
   margin-top: 2px;
 }
 
-.auth-submit:hover { background-color: #b8893e; transform: translateY(-1px); }
+.auth-submit:hover { background-color: #388e3c; transform: translateY(-1px); }
 .auth-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
 
 /* SOCIAL */
@@ -314,7 +314,7 @@
   font-family: 'DM Sans', sans-serif;
 }
 
-.auth-social-btn:hover { border-color: #d4a45a; background-color: #fffbf5; }
+.auth-social-btn:hover { border-color: #4caf50; background-color: #f0faf0; }
 
 .auth-social-icon { font-size: 1.1rem; flex-shrink: 0; }
 
@@ -327,12 +327,12 @@
 }
 
 .auth-footer-link a {
-  color: #d4a45a;
+  color: #4caf50;
   font-weight: 700;
   text-decoration: none;
 }
 
-.auth-footer-link a:hover { color: #b8893e; }
+.auth-footer-link a:hover { color: #388e3c; }
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
