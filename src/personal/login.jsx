@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaGithub, FaArrowLeft } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import API from '../api/axios';
 import LandingImg from "../landing.jpeg";
@@ -38,9 +38,9 @@ function LoginForm() {
         <div className="auth-left-overlay">
           <div className="auth-left-logo">
             <span>📚</span>
-            <span>PTMs</span>
+            <span className="auth-logo-text">PTMs</span>
           </div>
-          <div className="auth-left-bottom">
+          <div>
             <p className="auth-left-tagline">Personal Task Management</p>
             <h2 className="auth-left-heading">
               Made for<br />
