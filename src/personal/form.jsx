@@ -1,24 +1,29 @@
 import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import API from '../api/axios';
-import LoginImage from "../login_image.png";
+import LandingImg from "../landing.jpeg";
 import '../personal/signup.css';
 
 function SignUpForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
+  const [confirmPass, setConfirmPass] = useState('');
+  const [showPass, setShowPass] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [agreed, setAgreed] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
   const [code, setCode] = useState('');
-  
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    if (password !== confirmPass) { setError("Passwords don't match"); return; }
+    if (!agreed) { setError("Please agree to the terms to continue"); return; }
     setError('');
     setLoading(true);
     try {
@@ -48,52 +53,125 @@ function SignUpForm() {
     }
   };
 
+  const nameParts = name.trim().split(' ');
+  const firstName = nameParts[0] || '';
+  const lastName = nameParts.slice(1).join(' ') || '';
+
+  const LeftPanel = () => (
+    <div className="auth-left">
+      <img src={LandingImg} alt="PTMs" />
+      <div className="auth-left-overlay">
+        <div className="auth-left-logo"><span>📚</span><span>PTMs</span></div>
+        <div className="auth-left-bottom">
+          <p className="auth-left-tagline">Personal Task Management</p>
+          <h2 className="auth-left-heading">Made for<br /><em>Productive People</em><br />Everywhere</h2>
+          <p className="auth-left-desc">Organize your tasks, track your progress, and stay on top of everything — all in one beautiful place.</p>
+          <div className="auth-testimonial">
+            <div className="auth-stars">★★★★★</div>
+            <p className="auth-testimonial-text">"PTMs helped me stay organized and actually finish what I start. It's clean, fast, and just works."</p>
+            <div className="auth-testimonial-author">
+              <div className="auth-testimonial-avatar">H</div>
+              <div className="auth-testimonial-info">
+                <p>Hope Keza</p>
+                <p>Software Developer · Kigali</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <div className="signup-page">
-      <img src={LoginImage} className="signupImage" alt="hello" />
-      <div className="signup-card">
+    <div className="auth-page">
+      <LeftPanel />
+      <div className="auth-right">
+        <div className="auth-card">
+          <div className="auth-tabs">
+            <button className="auth-tab auth-tab-active">Create Account</button>
+            <Link to="/login" style={{ textDecoration: 'none' }}>
+              <button className="auth-tab">Sign In</button>
+            </Link>
+          </div>
 
-        <h1 className="signup-logo">📚 <span className="signup-logotext">PTMs</span></h1>
-        
-        {!isVerifying ? (
-          <>
-            <h2 className="signup-title">Create your account</h2>
-            {error && <p style={{ color: 'red', marginBottom: '10px' }}>{error}</p>}
-            <form className="signup-form" onSubmit={handleRegister}>
-              <label className="signup-label">Name</label>
-              <input type="text" className="signup-input" placeholder="Your full name" value={name} onChange={e => setName(e.target.value)} required />
-
-              <label className="signup-label">Email</label>
-              <input type="email" className="signup-input" placeholder="your@email.com" value={email} onChange={e => setEmail(e.target.value)} required />
-
-              <label className="signup-label">Password</label>
-              <input type="password" className="signup-input" placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} required minLength="6" />
-
-              <button type="submit" className="signup-btn" disabled={loading}>
-                {loading ? "Registering..." : "Sign Up"}
-              </button>
-
-              <p className="signup-footer">
-                Already have an account?{" "}
-                <Link to="/login" className="signup-link">Login</Link>
-              </p>
-            </form>
-          </>
-        ) : (
-          <>
-            <h2 className="signup-title">Verify Your Email</h2>
-            <p style={{ color: '#888', marginBottom: '20px', fontSize: '0.95rem' }}>We sent a code to {email}.</p>
-            {error && <p style={{ color: 'red', marginBottom: '10px' }}>{error}</p>}
-            <form className="signup-form" onSubmit={handleVerify}>
-              <label className="signup-label">Verification Code</label>
-              <input type="text" className="signup-input" placeholder="Enter 6-digit code" value={code} onChange={e => setCode(e.target.value)} required />
-
-              <button type="submit" className="signup-btn" disabled={loading}>
-                {loading ? "Verifying..." : "Verify & Continue"}
-              </button>
-            </form>
-          </>
-        )}
+          {!isVerifying ? (
+            <>
+              <h2 className="auth-heading">Join PTMs</h2>
+              <p className="auth-subheading">Create your account — it's completely free.</p>
+              {error && <div className="auth-error" style={{ marginBottom: '14px' }}>{error}</div>}
+              <form className="auth-form" onSubmit={handleRegister}>
+                <div className="auth-row">
+                  <div className="auth-field">
+                    <label className="auth-label">First name</label>
+                    <input type="text" className="auth-input" placeholder="Sofia" value={firstName}
+                      onChange={e => setName(e.target.value + (lastName ? ' ' + lastName : ''))} required />
+                  </div>
+                  <div className="auth-field">
+                    <label className="auth-label">Last name</label>
+                    <input type="text" className="auth-input" placeholder="Mendez" value={lastName}
+                      onChange={e => setName((firstName || '') + (e.target.value ? ' ' + e.target.value : ''))} />
+                  </div>
+                </div>
+                <div className="auth-field">
+                  <label className="auth-label">Email address</label>
+                  <input type="email" className="auth-input" placeholder="your@email.com" value={email}
+                    onChange={e => setEmail(e.target.value)} required />
+                </div>
+                <div className="auth-field">
+                  <label className="auth-label">Password</label>
+                  <div className="auth-input-wrap">
+                    <input type={showPass ? "text" : "password"} className="auth-input" placeholder="••••••••••••"
+                      value={password} onChange={e => setPassword(e.target.value)} required minLength="6"
+                      style={{ paddingRight: '40px' }} />
+                    <button type="button" className="auth-eye" onClick={() => setShowPass(!showPass)}>
+                      {showPass ? <FaEyeSlash /> : <FaEye />}
+                    </button>
+                  </div>
+                </div>
+                <div className="auth-field">
+                  <label className="auth-label">Confirm password</label>
+                  <div className="auth-input-wrap">
+                    <input type={showConfirm ? "text" : "password"} className="auth-input" placeholder="confirm password"
+                      value={confirmPass} onChange={e => setConfirmPass(e.target.value)} required
+                      style={{ paddingRight: '40px' }} />
+                    <button type="button" className="auth-eye" onClick={() => setShowConfirm(!showConfirm)}>
+                      {showConfirm ? <FaEyeSlash /> : <FaEye />}
+                    </button>
+                  </div>
+                </div>
+                <label className="auth-check-row">
+                  <input type="checkbox" checked={agreed} onChange={e => setAgreed(e.target.checked)} />
+                  <span>I agree to PTMs' Terms of Service and Privacy Policy.</span>
+                </label>
+                <button type="submit" className="auth-submit" disabled={loading}>
+                  {loading ? "Creating account..." : "Create My Account"}
+                </button>
+              </form>
+              <p className="auth-divider">or Sign up with</p>
+              <div className="auth-socials">
+                <button className="auth-social-btn"><FcGoogle className="auth-social-icon" /> Google</button>
+                <button className="auth-social-btn"><FaGithub className="auth-social-icon" /> GitHub</button>
+              </div>
+              <p className="auth-footer-link">Already have an account? <Link to="/login">Sign in</Link></p>
+            </>
+          ) : (
+            <>
+              <h2 className="auth-heading">Verify your email</h2>
+              <p className="auth-subheading">We sent a 6-digit code to <strong>{email}</strong></p>
+              {error && <div className="auth-error" style={{ marginBottom: '14px' }}>{error}</div>}
+              <form className="auth-form" onSubmit={handleVerify}>
+                <div className="auth-field">
+                  <label className="auth-label">Verification Code</label>
+                  <input type="text" className="auth-input" placeholder="Enter 6-digit code"
+                    value={code} onChange={e => setCode(e.target.value)} required />
+                </div>
+                <button type="submit" className="auth-submit" disabled={loading}>
+                  {loading ? "Verifying..." : "Verify & Continue"}
+                </button>
+              </form>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

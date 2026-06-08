@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import API from '../api/axios';
-import LoginImage2 from "../login_image2.png";
+import LandingImg from "../landing.jpeg";
 import '../personal/signup.css';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -28,31 +31,109 @@ function LoginForm() {
   };
 
   return (
-    <div className="signup-page">
-       <img src={LoginImage2} className="signupImage" alt="hello" />
-      <div className="signup-card">
-        <h1 className="signup-logo">📚 <span className="signup-logotext">PTMs</span></h1>
-        <h2 className="signup-title">Welcome Back 👋</h2>
-        <p style={{color:'#888', marginBottom:'20px', fontSize:'0.95rem'}}>login to your account</p>
+    <div className="auth-page">
+      {/* LEFT — landing image */}
+      <div className="auth-left">
+        <img src={LandingImg} alt="PTMs" />
+        <div className="auth-left-overlay">
+          <div className="auth-left-logo">
+            <span>📚</span>
+            <span>PTMs</span>
+          </div>
+          <div className="auth-left-bottom">
+            <p className="auth-left-tagline">Personal Task Management</p>
+            <h2 className="auth-left-heading">
+              Made for<br />
+              <em>Productive People</em><br />
+              Everywhere
+            </h2>
+            <p className="auth-left-desc">
+              Organize your tasks, track your progress, and stay on top of everything — all in one beautiful place.
+            </p>
+            <div className="auth-testimonial">
+              <div className="auth-stars">★★★★★</div>
+              <p className="auth-testimonial-text">
+                "PTMs helped me stay organized and actually finish what I start. It's clean, fast, and just works."
+              </p>
+              <div className="auth-testimonial-author">
+                <div className="auth-testimonial-avatar">H</div>
+                <div className="auth-testimonial-info">
+                  <p>Hope Keza</p>
+                  <p>Software Developer · Kigali</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        {error && <p style={{ color: 'red', marginBottom: '10px' }}>{error}</p>}
+      {/* RIGHT — form */}
+      <div className="auth-right">
+        <div className="auth-card">
+          {/* Tab switcher */}
+          <div className="auth-tabs">
+            <Link to="/signup" style={{ textDecoration: 'none' }}>
+              <button className="auth-tab">Create Account</button>
+            </Link>
+            <button className="auth-tab auth-tab-active">Sign In</button>
+          </div>
 
-        <form className="signup-form" onSubmit={handleLogin}>
-          <label className="signup-label">Email</label>
-          <input type="email" className="signup-input" placeholder="your@email.com" value={email} onChange={e => setEmail(e.target.value)} required />
+          <h2 className="auth-heading">Welcome back</h2>
+          <p className="auth-subheading">Sign in to your PTMs account to continue.</p>
 
-          <label className="signup-label">Password</label>
-          <input type="password" className="signup-input" placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} required />
+          {error && <div className="auth-error" style={{ marginBottom: '14px' }}>{error}</div>}
 
-          <button type="submit" className="signup-btn" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
-          </button>
+          <form className="auth-form" onSubmit={handleLogin}>
+            <div className="auth-field">
+              <label className="auth-label">Email address</label>
+              <input
+                type="email"
+                className="auth-input"
+                placeholder="your@email.com"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                required
+              />
+            </div>
 
-          <p className="signup-footer">
-            Don't have an account?{" "}
-            <Link to="/signup" className="signup-link">create account</Link>
+            <div className="auth-field">
+              <label className="auth-label">Password</label>
+              <div className="auth-input-wrap">
+                <input
+                  type={showPass ? "text" : "password"}
+                  className="auth-input"
+                  placeholder="••••••••••••"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  required
+                  style={{ paddingRight: '40px' }}
+                />
+                <button type="button" className="auth-eye" onClick={() => setShowPass(!showPass)}>
+                  {showPass ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" className="auth-submit" disabled={loading}>
+              {loading ? "Signing in..." : "Sign In"}
+            </button>
+          </form>
+
+          <p className="auth-divider">or Continue with</p>
+
+          <div className="auth-socials">
+            <button className="auth-social-btn">
+              <FcGoogle className="auth-social-icon" /> Google
+            </button>
+            <button className="auth-social-btn">
+              <FaGithub className="auth-social-icon" /> GitHub
+            </button>
+          </div>
+
+          <p className="auth-footer-link">
+            Don't have an account? <Link to="/signup">Create account</Link>
           </p>
-        </form>
+        </div>
       </div>
     </div>
   );
