@@ -38,6 +38,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .auth-left-logo {
@@ -75,6 +76,7 @@
   color: #fff;
   line-height: 1.15;
   margin-bottom: 12px;
+  text-align: center;
 }
 
 .auth-left-heading em {
@@ -88,6 +90,9 @@
   line-height: 1.7;
   max-width: 340px;
   margin-bottom: 28px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Testimonial card */
@@ -97,6 +102,8 @@
   border-radius: 14px;
   padding: 18px 20px;
   max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .auth-stars { color: #4caf50; font-size: 0.9rem; margin-bottom: 8px; }
